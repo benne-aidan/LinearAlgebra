@@ -113,8 +113,8 @@ void MatNode_destroy(MatNode* head, char identifier) {
     MatNode* currNode = head;
 
     if (head->next == NULL) {
-        printf("List empty, node cannot be deleted.\n");
-        return;
+        printf("ERROR: list empty, node cannot be deleted.\n");
+        exit(1);
     }
 
     // Skip head node
