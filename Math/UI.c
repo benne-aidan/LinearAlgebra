@@ -335,7 +335,7 @@ void Menu_multiplyMatrices(MatNode* listHead) {
     char userChoice;
     char productName;
     doNotAdvance = true;
-
+    // Save Matrix
     while (doNotAdvance) {
         printf("Would you like to save this matrix (y/n)?\n");
 
@@ -349,14 +349,23 @@ void Menu_multiplyMatrices(MatNode* listHead) {
                         printf("Enter a name for the new matrix: ");
                         // Check if valid input is passed
                         if (scanf("%c", &productName) == 1 && productName >= 65 && productName <= 90) {
-                            product->identifier = productName;
+                            // Check for duplicate name
+                            Matrix* temp = MatNode_searchList(listHead, productName);
+                            if (temp != NULL) {
+                                printf("Matrix %c already exists. Please choose another letter.\n", productName);
+                                Matrix_destroy(temp);
+                                fflush(stdin);
+                            }
+                            else {
+                                product->identifier = productName;
+                                MatNode* newNode = NULL;
+                                newNode = MatNode_create(newNode, product);
+                                MatNode_insertSorted(listHead, newNode);
+                                printf("Matrix %c saved successfully.\n", productName);
+                                doNotAdvance = false;
+                                fflush(stdin);
+                            }
                             
-                            MatNode* newNode = NULL;
-                            newNode = MatNode_create(newNode, product);
-                            MatNode_insertSorted(listHead, newNode);
-                            printf("Matrix %c saved successfully.\n", productName);
-                            doNotAdvance = false;
-                            fflush(stdin);
                         }
                         else {
                             printf("Invalid input. Matrices are named with single capital letters.\n");

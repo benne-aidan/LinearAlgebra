@@ -36,8 +36,9 @@ void MatNode_insertSorted(MatNode* head, MatNode* newNode) {
         }
         // Case: duplicate name
         else if (MatNode_getIdentifier(newNode) == MatNode_getIdentifier(currNode->next)) {
-            printf("Matrix %c already exists. Please choose another letter.\n", MatNode_getIdentifier(newNode));
-            return;
+            // Check for this case in all use cases. If this case is reached in this function, throw error
+            printf("ERROR: matrix %c passed to function already exists\n", MatNode_getIdentifier(newNode));
+            exit(1);
         }
         // Case: continue through list
         else {
