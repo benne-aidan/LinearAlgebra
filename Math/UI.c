@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <ctype.h>
-#include <Windows.h>
+#include <unistd.h>
 #include "matrix.h"
 #include "UI.h"
 #include "linkedList.h"
