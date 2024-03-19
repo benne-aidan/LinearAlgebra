@@ -64,7 +64,7 @@ int Matrix_determinant(Matrix* mat) {
 }
 
 
-// Sub functions: Not full operations, solely used in other operations
+// Helper functions
 
 // Returns cofactor of specified matrix element
 int Matrix_cofactorOf(Matrix* mat, int row, int col) {
@@ -75,7 +75,7 @@ int Matrix_cofactorOf(Matrix* mat, int row, int col) {
         exit(1);
     }
     
-    // Performing the expopnent manually rather than using math.h to avoid dealing with potential rounding errors with double to int conversion
+    // Manual exponentiation rather than using math.h to avoid dealing with potential rounding errors with double to int conversion
     int power = row + col;
     int base = -1;
 

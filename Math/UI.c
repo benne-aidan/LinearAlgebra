@@ -28,37 +28,41 @@ void Menu_main() {
 
         switch (*menuSelection) {
             case 'm':
+                while (getchar() != '\n');
                 free(menuSelection);
                 Menu_createMatrix(head);
                 break;
             case 's':
                 free(menuSelection);
+                while (getchar() != '\n');
                 Menu_displayMatrix(head);
                 break;
             case 'q':
                 free(menuSelection);
                 printf("Goodbye!\n");
-                Sleep(1000);
+                while (getchar() != '\n');
                 keepRunning = false;
                 break;
             case 'd':
                 free(menuSelection);
+                while (getchar() != '\n');
                 Menu_destroyMatrix(head);
                 break;
             case 'o':
                 free(menuSelection);
+                while (getchar() != '\n');
                 Menu_operations(head);
                 break;
             default:
                 free(menuSelection);
                 printf("Invalid input. Please select one of the options.\n\n");
+                while (getchar() != '\n');
                 break;
         }
     }
 }
 
 void Menu_createMatrix(MatNode* listHead) {
-    fflush(stdin);
     int numRows;
     int numCols;
     char letter;
@@ -74,7 +78,7 @@ void Menu_createMatrix(MatNode* listHead) {
         else {
             printf("Input must be integer between 1-50 (inclusive)\n");
         }
-        fflush(stdin);
+        while (getchar() != '\n');
     }
 
     doNotAdvance = true;
@@ -88,7 +92,7 @@ void Menu_createMatrix(MatNode* listHead) {
         else {
             printf("Input must be integer between 1-50 (inclusive)\n");
         }
-        fflush(stdin);
+        while (getchar() != '\n');
     }
 
     // Variables for array to be passed into matrix
@@ -102,10 +106,10 @@ void Menu_createMatrix(MatNode* listHead) {
         while (scanf("%d", &(matrixElements[i])) != 1) {
             // Loop is only entered if incorrect input is given
             printf("Input must be an integer.\n");
-            fflush(stdin);
+            while (getchar() != '\n');
         }
     }
-    fflush(stdin);
+    while (getchar() != '\n');
     
     doNotAdvance = true;
     while (doNotAdvance) {
@@ -127,7 +131,7 @@ void Menu_createMatrix(MatNode* listHead) {
         else {
             printf("Name must be a capital letter.\n");
         }
-        fflush(stdin);
+        while (getchar() != '\n');
     }
 
     // Create and initialize matrix
@@ -148,7 +152,6 @@ void Menu_createMatrix(MatNode* listHead) {
 }
 
 void Menu_displayMatrix(MatNode* listHead) {
-    fflush(stdin);
     char userChoice;
     bool doNotAdvance = true;
     Matrix* displayMat = NULL;
@@ -179,12 +182,11 @@ void Menu_displayMatrix(MatNode* listHead) {
         else {
             printf("Invalid input. Matrices are named with single capital letters.\n");
         }
-        fflush(stdin);
+        while (getchar() != '\n');
     }    
 }
 
 void Menu_destroyMatrix(MatNode* listHead) {
-    fflush(stdin);
     char userChoice;
     Matrix* destMat = NULL;
     bool doNotAdvance = true;
@@ -213,7 +215,7 @@ void Menu_destroyMatrix(MatNode* listHead) {
         else {
             printf("Invalid input. Matrices are named with single capital letters.\n");
         }
-        fflush(stdin);
+        while (getchar() != '\n');
     }
 }
 
@@ -225,7 +227,7 @@ void Menu_operations(MatNode* listHead) {
         printf("What operation would you like to perform?\nMatrix multiplication (m)\nDeterminant (d)\nQuit to main menu (q)\n\n");
 
         scanf("%c", &userChoice);
-        fflush(stdin);
+        while (getchar() != '\n');
         switch (userChoice) {
             case 'd':
                 Menu_determinant(listHead);
@@ -255,13 +257,11 @@ void Menu_multiplyMatrices(MatNode* listHead) {
     // TODO: Entering first matrix and entering second matrix use nearly identical code, could be abstracted to function to improve readability
 
     // Enter first matrix
-    fflush(stdin);
     while (doNotAdvance) {
         printf("Enter the name of the first matrix you would like to multiply (or \'e\' to exit, or \'l\' to list options): ");
 
         // Check for valid input
         if ((scanf("%c", &matName1) == 1) && matName1 >= 65 && matName1 <= 90) {
-            fflush(stdin);
             // Check to see if matrix exists
             mat1 = MatNode_searchList(listHead, matName1);
             if (mat1 != NULL) {
@@ -272,28 +272,25 @@ void Menu_multiplyMatrices(MatNode* listHead) {
             }
         }
         else if (matName1 == 'e') {
-            fflush(stdin);
+            while (getchar() != '\n');
             return;
         }
         else if (matName1 == 'l') {
             MatNode_printIdentifiers(listHead);
-            fflush(stdin);
         }
         else {
             printf("Invalid input. Matrices are named with single capital letters.\n");
-            fflush(stdin);
         }
+        while (getchar() != '\n');
     }
 
     // Enter second matrix
     doNotAdvance = true;
-    fflush(stdin);
     while (doNotAdvance) {
         printf("Enter the second matrix you would like to multiply (or \'e\' to exit, or \'l\' to list options): ");
 
         // Check for valid input
         if ((scanf("%c", &matName2) == 1) && matName2 >= 65 && matName2 <= 90) {
-            fflush(stdin);
             // Check to see if matrix exists
             mat2 = MatNode_searchList(listHead, matName2);
             if (mat2 != NULL) {
@@ -304,17 +301,16 @@ void Menu_multiplyMatrices(MatNode* listHead) {
             }
         }
         else if (matName2 == 'e') {
-            fflush(stdin);
+            while (getchar() != '\n');
             return;
         }
         else if (matName1 == 'l') {
-            fflush(stdin);
             MatNode_printIdentifiers(listHead);
         }
         else {
             printf("Invalid input. Matrices are named with single capital letters.\n");
-            fflush(stdin);
         }
+        while (getchar() != '\n');
     }
 
     // Initialize product matrix
@@ -341,7 +337,7 @@ void Menu_multiplyMatrices(MatNode* listHead) {
 
         // Check if valid input is passed
         if (scanf("%c", &userChoice) == 1) {
-            fflush(stdin);
+            while (getchar() != '\n');
             switch (tolower(userChoice)) {
                 case 'y':
                     // Prompt for name of new matrix
@@ -354,7 +350,6 @@ void Menu_multiplyMatrices(MatNode* listHead) {
                             if (temp != NULL) {
                                 printf("Matrix %c already exists. Please choose another letter.\n", productName);
                                 Matrix_destroy(temp);
-                                fflush(stdin);
                             }
                             else {
                                 product->identifier = productName;
@@ -363,24 +358,20 @@ void Menu_multiplyMatrices(MatNode* listHead) {
                                 MatNode_insertSorted(listHead, newNode);
                                 printf("Matrix %c saved successfully.\n", productName);
                                 doNotAdvance = false;
-                                fflush(stdin);
                             }
-                            
                         }
                         else {
                             printf("Invalid input. Matrices are named with single capital letters.\n");
-                            fflush(stdin);
                         }
+                        while (getchar() != '\n');
                     }
                     break;
                 case 'n':
                     Matrix_destroy(product);
                     doNotAdvance = false;
-                    fflush(stdin);
                     break;
                 default:
                     printf("Invalid input. Please chose \'y\' or \'n\'\n");
-                    fflush(stdin);
                     break;
             }
         }
@@ -394,8 +385,7 @@ void Menu_determinant(MatNode* listHead) {
 
     while (doNotAdvance) {
         printf("Enter the name of the matrix you would like the determinant of (or \'e\' to exit, or \'l\' to list options): ");
-        
-        fflush(stdin);
+
         // Check for valid input
         if (scanf("%c", &userChoice) == 1 && userChoice >= 65 && userChoice <= 90) {
             detMat = MatNode_searchList(listHead, userChoice);
@@ -403,7 +393,6 @@ void Menu_determinant(MatNode* listHead) {
             // Check if matrix exists
             if (detMat == NULL) {
                 printf("Matrix %c does not exist.\n", userChoice);
-                fflush(stdin);
             }
             // If matrix does exist:
             else {
@@ -418,7 +407,7 @@ void Menu_determinant(MatNode* listHead) {
             }
         }
         else if (userChoice == 'e') {
-            fflush(stdin);
+            while (getchar() != '\n');
             return;
         }
         else if (userChoice == 'l') {
@@ -427,6 +416,6 @@ void Menu_determinant(MatNode* listHead) {
         else {
             printf("Invalid input. Matrices are named with single capital letters.\n");
         }
-        fflush(stdin);
+        while (getchar() != '\n');
     }
 }
